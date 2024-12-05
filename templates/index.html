@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Видео Интервью</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Видео Интервью</h1>
+        <form method="POST" action="/upload" enctype="multipart/form-data">
+            <label for="video">Загрузите видео для анализа:</label>
+            <input type="file" id="video" name="video" accept="video/*" required>
+            <button type="submit">Анализировать</button>
+        </form>
+    </div>
+</body>
+</html>

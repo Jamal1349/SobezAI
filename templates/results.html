@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты анализа</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Результаты анализа</h1>
+        <h2>График зрительного контакта:</h2>
+        <img src="{{ nitec_graph }}" alt="График зрительного контакта">
+        
+        <h2>График распределения эмоций:</h2>
+        <img src="{{ emotion_graph }}" alt="График распределения эмоций">
+
+        <a href="{{ url_for('index') }}">Вернуться на главную</a>
+    </div>
+</body>
+</html>

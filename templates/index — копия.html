@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интервью</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        Онлайн Интервью
+    </header>
+    <div class="container">
+        <!-- Вопросы -->
+        <div class="section">
+            <h2>Вопросы:</h2>
+            <ul id="question-list">
+                <li>Вопросы загружаются...</li>
+            </ul>
+        </div>
+
+        <!-- Загрузка видео -->
+        <div class="section">
+            <h2>Загрузить готовое видео:</h2>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <button type="submit">Загрузить</button>
+            </form>
+        </div>
+
+        <!-- Запись видео -->
+        <div class="section">
+            <h2>Записать видео:</h2>
+            <video id="video" width="100%" autoplay muted></video>
+            <div style="text-align: center; margin-top: 10px;">
+                <button id="start-record">Начать запись</button>
+                <button id="stop-record" disabled>Остановить запись</button>
+                <button id="save-video" disabled>Сохранить видео</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
