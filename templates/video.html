@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запись видео</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .video-container {
+            width: 65%;
+        }
+        .interview-container {
+            width: 30%;
+            border-left: 2px solid #ccc;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Видео и кнопки -->
+    <div class="video-container">
+        <h1>Запись видео</h1>
+        <img src="{{ url_for('video.video_feed') }}" width="640" height="480">
+        <br>
+
+        <a href="{{ url_for('video.start_recording') }}">
+            <button>Начать запись</button>
+        </a>
+
+        <a href="{{ url_for('video.stop_recording') }}">
+            <button>Остановить запись</button>
+        </a>
+        <br>
+
+        <a href="/"> 
+            <button>Вернуться на главную</button>
+        </a>
+    </div>
+
+    <!-- Блок собеседования -->
+    <div class="interview-container">
+        <h2>Собеседование</h2>
+
+        <form action="{{ url_for('video.start_interview') }}" method="post">
+            <label for="category">Выберите категорию:</label>
+            <select name="category" id="category">
+                <option value="programmer">Программист</option>
+                <option value="other">Другое</option>
+            </select>
+            <br><br>
+            <button type="submit">Начать собеседование</button>
+        </form>
+
+        <!-- Блок для вопросов -->
+        {% if questions %}
+            <h3>Вопросы:</h3>
+            <ul>
+                {% for question in questions %}
+                    <li>{{ question }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+</body>
+</html>
