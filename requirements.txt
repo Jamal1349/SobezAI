@@ -17,3 +17,5 @@ mediapipe>=0.10.20
 matplotlib>=3.9.3
 torch>=2.5.1
 nitec>=0.0.2
+torchvision>=0.20.1
+face_detection>=1.0.5
