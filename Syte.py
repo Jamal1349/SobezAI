@@ -5,16 +5,25 @@ from for_test_opt import video_proc
 import numpy as np
 import matplotlib
 from video import video_bp
+from moviepy import VideoFileClip
 
 
 matplotlib.use('Agg')
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = './static/uploads'
 app.config['GRAPH_FOLDER'] = './static/graphs'
+app.config['AUDIO_PATH'] = 'output.mp3'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 os.makedirs(app.config['GRAPH_FOLDER'], exist_ok=True)
 app.register_blueprint(video_bp, url_prefix='/video')
 
+
+def extract_audio(video_path, audio_path):
+    try:
+        video = VideoFileClip(video_path)
+        video.audio.write_audiofile(audio_path)
+    except Exception as e:
+        print(f"Ошибка при извлечении аудио: {e}")
 
 @app.route('/')
 def index():
@@ -32,6 +41,7 @@ def upload_video():
     if file:
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(file_path)
+        extract_audio(file_path, audio_path)
         results_emotion, results_gesture, results_nitec = video_proc(file_path, num_processes=4, n=5)
         build_gesture_graph(results_gesture, os.path.join(app.config['GRAPH_FOLDER'], 'gesture_graph.png'))
         build_emotion_graph(results_emotion, os.path.join(app.config['GRAPH_FOLDER'], 'emotion_graph.png'))
