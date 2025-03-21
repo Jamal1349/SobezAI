@@ -19,3 +19,4 @@ torch>=2.5.1
 nitec>=0.0.2
 torchvision>=0.20.1
 face_detection>=0.2.1
+pyaudio>=0.2.14
