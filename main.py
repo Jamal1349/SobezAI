@@ -1,6 +1,6 @@
 import whisperx
 import gc 
-from google.gemma import generate
+from gemma import generate
 
 def whisper(audio_file):
     device = "cuda" 
