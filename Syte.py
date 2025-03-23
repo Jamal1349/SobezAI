@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib
 from video import video_bp
 from moviepy import VideoFileClip
-
+from whisper import whisper
 
 matplotlib.use('Agg')
 app = Flask(__name__)
@@ -42,17 +42,18 @@ def upload_video():
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(file_path)
         extract_audio(file_path, audio_path)
+        whisper_text-whisper('audio.mp3')
         results_emotion, results_gesture, results_nitec = video_proc(file_path, num_processes=4, n=5)
         build_gesture_graph(results_gesture, os.path.join(app.config['GRAPH_FOLDER'], 'gesture_graph.png'))
         build_emotion_graph(results_emotion, os.path.join(app.config['GRAPH_FOLDER'], 'emotion_graph.png'))
         build_nitec_graph(results_nitec, os.path.join(app.config['GRAPH_FOLDER'], 'nitec_graph.png'))
-
-        return redirect(url_for('results'))
+       
+        return redirect(url_for('results', whisper_text=whisper_text))
 
 
 @app.route('/results')
 def results():
-    return render_template('results.html',
+    whisper_text = request.args.get('whisper_text', 'Нет данных')
                            nitec_graph=os.path.join('static/graphs', 'nitec_graph.png'),
                            emotion_graph=os.path.join('static/graphs', 'emotion_graph.png'),
                            gesture_graph=os.path.join('static/graphs', 'gesture_graph.png'))
